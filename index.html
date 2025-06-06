@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Modern Task Manager</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="container">
@@ -14,17 +14,18 @@
 
     <section class="task-input">
       <input type="text" id="taskInput" placeholder="Enter a new task..." />
-      <button id="addBtn">Add</button>
+      <button id="addBtn" title="Add Task">➕ Add</button>
     </section>
 
     <section>
       <ul id="taskList" aria-label="Task List"></ul>
+      <p id="emptyMessage">No tasks yet. Add one!</p>
     </section>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Task Manager Inc.</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Task Manager Inc.</p>
+    </footer>
+  </main>
 
   <script src="script.js"></script>
 </body>

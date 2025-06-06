@@ -1,20 +1,20 @@
-const tasks = [
-  { text: "Learn semantic HTML", completed: false },
-  { text: "Master Flexbox and Grid", completed: false },
-];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 const taskList = document.getElementById("taskList");
 const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
+const emptyMessage = document.getElementById("emptyMessage");
 
 function renderTasks() {
   taskList.innerHTML = "";
+  emptyMessage.style.display = tasks.length ? "none" : "block";
+
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     if (task.completed) li.classList.add("completed");
 
-    const taskSpan = document.createElement("span");
-    taskSpan.textContent = task.completed ? `${task.text} (Completed)` : task.text;
+    const span = document.createElement("span");
+    span.textContent = task.text;
 
     const btnGroup = document.createElement("div");
     btnGroup.className = "task-buttons";
@@ -29,13 +29,12 @@ function renderTasks() {
     deleteBtn.title = "Delete Task";
     deleteBtn.onclick = () => deleteTask(index);
 
-    btnGroup.appendChild(toggleBtn);
-    btnGroup.appendChild(deleteBtn);
-
-    li.appendChild(taskSpan);
-    li.appendChild(btnGroup);
+    btnGroup.append(toggleBtn, deleteBtn);
+    li.append(span, btnGroup);
     taskList.appendChild(li);
   });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask() {

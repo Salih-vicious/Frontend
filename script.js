@@ -1,13 +1,23 @@
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let isDarkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
 
 const taskList = document.getElementById("taskList");
 const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const emptyMessage = document.getElementById("emptyMessage");
+const clearAllBtn = document.getElementById("clearAllBtn");
+const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme() {
+  document.body.classList.toggle("dark-mode", isDarkMode);
+  themeToggle.textContent = isDarkMode ? "🌞" : "🌙";
+  localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+}
 
 function renderTasks() {
   taskList.innerHTML = "";
   emptyMessage.style.display = tasks.length ? "none" : "block";
+  clearAllBtn.style.display = tasks.length ? "inline-block" : "none";
 
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
@@ -56,9 +66,24 @@ function deleteTask(index) {
   renderTasks();
 }
 
+function clearAllTasks() {
+  if (confirm("Are you sure you want to delete all tasks?")) {
+    tasks = [];
+    renderTasks();
+  }
+}
+
+function handleThemeToggle() {
+  isDarkMode = !isDarkMode;
+  applyTheme();
+}
+
 addBtn.addEventListener("click", addTask);
 taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") addTask();
 });
+clearAllBtn.addEventListener("click", clearAllTasks);
+themeToggle.addEventListener("click", handleThemeToggle);
 
+applyTheme();
 renderTasks();

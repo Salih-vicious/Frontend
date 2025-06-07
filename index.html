@@ -10,16 +10,18 @@
   <main class="container">
     <header>
       <h1>📝 Task Manager</h1>
+      <button id="themeToggle" title="Toggle Dark Mode">🌙</button>
     </header>
 
     <section class="task-input">
-      <input type="text" id="taskInput" placeholder="Enter a new task..." />
+      <input type="text" id="taskInput" placeholder="Enter a new task..." aria-label="New Task"/>
       <button id="addBtn" title="Add Task">➕ Add</button>
     </section>
 
-    <section>
+    <section class="task-section">
       <ul id="taskList" aria-label="Task List"></ul>
       <p id="emptyMessage">No tasks yet. Add one!</p>
+      <button id="clearAllBtn" class="clear-btn">🧹 Clear All</button>
     </section>
 
     <footer>
